@@ -176,7 +176,8 @@
         const fetchCount = Config.root.fetchCount
 
         const branches = await this.$api(`/projects/${this.projectId}/repository/branches`, {
-          per_page: fetchCount > 100 ? 100 : fetchCount
+          per_page: fetchCount > 100 ? 100 : fetchCount,
+          search: this.filter.search
         }, { follow_next_page_links: fetchCount > 100 })
         const branchNames = branches.filter(branch => showMerged ? true : !branch.merged)
           .sort((a, b) => new Date(b.commit.committed_date).getTime() - new Date(a.commit.committed_date).getTime()).reverse()

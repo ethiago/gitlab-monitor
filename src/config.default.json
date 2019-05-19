@@ -24,6 +24,7 @@
   },
   "projectFilter": {
     "*": {
+      "search": null,
       "include": ".*",
       "exclude": null,
       "default": null,
