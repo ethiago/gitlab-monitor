@@ -106,7 +106,7 @@ Your configuration overrides the default configuration, which can be found
     // don't have their own configuration
     "*": {
 
-      // Used to search for branches (see https://docs.gitlab.com/ee/api/branches.html)
+      // Used to search for branches (see https://docs.gitlab.com/ee/api/branches.html). Can be a single value or a array
       "search": null,
     
       // Include branches that match this RegExp

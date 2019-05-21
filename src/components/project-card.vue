@@ -174,18 +174,34 @@
         const showMerged = this.showMerged
         const showTags = this.showTags
         const fetchCount = Config.root.fetchCount
-
-        const branches = await this.$api(`/projects/${this.projectId}/repository/branches`, {
-          per_page: fetchCount > 100 ? 100 : fetchCount,
-          search: this.filter.search
-        }, { follow_next_page_links: fetchCount > 100 })
-        const branchNames = branches.filter(branch => showMerged ? true : !branch.merged)
-          .sort((a, b) => new Date(b.commit.committed_date).getTime() - new Date(a.commit.committed_date).getTime()).reverse()
-          .map(branch => branch.name)
-          .filter(branchName => {
-            return !!branchName.match(new RegExp(this.filter.include)) &&
-              (!this.filter.exclude || !branchName.match(new RegExp(this.filter.exclude)))
+        const multiSearch = this.filter.search ? 
+                              Array.isArray(this.filter.search) ? this.filter.search : [this.filter.search] 
+                            : [null]
+        
+        var branches = []
+        for (const pattern of multiSearch) {
+          const b = (await this.$api(`/projects/${this.projectId}/repository/branches`, {
+            per_page: fetchCount > 100 ? 100 : fetchCount,
+            search: pattern
+          }, { follow_next_page_links: fetchCount > 100 }))
+          .filter(branch => showMerged ? true : !branch.merged)
+          .filter(branch => {
+            return !!branch.name.match(new RegExp(this.filter.include)) &&
+              (!this.filter.exclude || !branch.name.match(new RegExp(this.filter.exclude)))
           })
+          branches.push(b)
+        }
+
+        const distinct = (value, index, self) => {
+          return self.indexOf(value) === index
+        }
+
+        const branchNames = branches
+         .flat()
+         .sort((a, b) => new Date(b.commit.committed_date).getTime() - new Date(a.commit.committed_date).getTime()).reverse()
+         .map(branch => branch.name)
+         .filter(distinct)
+
         let tags = []
         if (showTags) {
           tags = await this.$api(`/projects/${this.projectId}/repository/tags`, {
