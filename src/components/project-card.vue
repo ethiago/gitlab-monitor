@@ -204,7 +204,7 @@
           return flatted
         }
 
-        const branchNames = typeof branches.flat === "function" ? branches.flat() : flat(branches)
+        const branchNames = (typeof branches.flat === "function" ? branches.flat() : flat(branches))
          .sort((a, b) => new Date(b.commit.committed_date).getTime() - new Date(a.commit.committed_date).getTime()).reverse()
          .map(branch => branch.name)
          .filter(distinct)
