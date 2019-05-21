@@ -178,7 +178,7 @@
                               Array.isArray(this.filter.search) ? this.filter.search : [this.filter.search] 
                             : [null]
         
-        var branches = []
+        let branches = []
         for (const pattern of multiSearch) {
           const b = (await this.$api(`/projects/${this.projectId}/repository/branches`, {
             per_page: fetchCount > 100 ? 100 : fetchCount,
@@ -195,9 +195,16 @@
         const distinct = (value, index, self) => {
           return self.indexOf(value) === index
         }
+        
+        const flat = (list) => {
+          let flatted = []
+          for (const value of list) {
+            flatted = flatted.concat(value)
+          }
+          return flatted
+        }
 
-        const branchNames = branches
-         .flat()
+        const branchNames = typeof branches.flat === "function" ? branches.flat() : flat(branches)
          .sort((a, b) => new Date(b.commit.committed_date).getTime() - new Date(a.commit.committed_date).getTime()).reverse()
          .map(branch => branch.name)
          .filter(distinct)
