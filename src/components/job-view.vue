@@ -87,16 +87,16 @@
     .job-circle {
       width: auto;
       display: inline-flex;
-      height: 70px;
-      border: 3x solid rgba(255, 255, 255, 0.8);
-      border-radius: 50px;
+      height: 24px;
+      border: 2px solid rgba(255, 255, 255, 0.8);
+      border-radius: 24px;
       line-height: 24px;
       padding: 0 6px;
-      font-size: 55px;
+      font-size: 12px;
       transition: background-color 200ms;
 
       &.square {
-        width: 70px;
+        width: 24px;
         padding: 0;
       }
 
@@ -125,16 +125,16 @@
       }
 
       svg {
-        width: 70px;
-        height: 70px;
+        width: 24px;
+        height: 24px;
         fill: rgba(255, 255, 255, 0.8);
       }
     }
 
     .pipe {
-      height: 3px;
+      height: 2px;
       background-color: rgba(255, 255, 255, 0.8);
-      width: 15px;
+      width: 6px;
     }
   }
 </style>
