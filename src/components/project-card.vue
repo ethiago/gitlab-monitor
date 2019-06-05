@@ -27,7 +27,7 @@
         </a>
       </div>
       <div class="spacer"></div>
-      <gitlab-icon class="calendar-icon" name="calendar" size="12" />
+      <gitlab-icon class="calendar-icon" name="calendar" size="25" />
       <timeago v-if="project !== null" :datetime="project.last_activity_at" :auto-update="1"></timeago>
       <time v-else>...</time>
     </div>
@@ -349,14 +349,14 @@
 
       .title {
         white-space: nowrap;
-        font-size: 16px;
+        font-size: 100px;
         font-weight: bold;
         text-shadow: 1.5px 1.5px rgba(0, 0, 0, 0.4);
         text-decoration: none;
         color: inherit;
 
         &.small {
-          font-size: 12px;
+          font-size: 30px;
           line-height: 0.6;
         }
       }
@@ -380,7 +380,7 @@
       border-top: 1px solid rgba(255, 255, 255, 0.1);
       display: flex;
       align-items: center;
-      font-size: 12px;
+      font-size: 40px;
       color: rgba(255, 255, 255, 0.3);
 
       time {

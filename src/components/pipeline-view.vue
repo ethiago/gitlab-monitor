@@ -10,7 +10,7 @@
         rel="noopener noreferrer"
         :href="project.web_url + '/tree/' + pipeline.ref"
       >
-        <octicon name="git-branch" scale="0.9" />
+        <octicon name="git-branch" scale="2.5" />
         {{ pipeline.ref }}
       </a>
 
@@ -21,7 +21,7 @@
           rel="noopener noreferrer"
           :href="project.web_url + '/pipelines/' + pipeline.id"
         >
-          <gitlab-icon v-if="showPipelineIds" class="pipeline-icon" name="hashtag" size="12" />
+          <gitlab-icon v-if="showPipelineIds" class="pipeline-icon" name="hashtag" size="30" />
           <div v-if="showPipelineIds" class="pipeline-id">{{ pipeline.id }}</div>
         </a>
         <div class="jobs">
@@ -31,9 +31,9 @@
             Pipeline skipped
           </div>
         </div>
-        <gitlab-icon v-if="showDurations && duration !== null" class="clock-icon" name="clock" size="10" />
+        <gitlab-icon v-if="showDurations && duration !== null" class="clock-icon" name="clock" size="40" />
         <span v-if="showDurations && duration !== null" class="duration">{{ durationString }}</span>
-        <gitlab-icon v-if="showUsers && duration !== null" class="user-icon" name="user" size="10" />
+        <gitlab-icon v-if="showUsers && duration !== null" class="user-icon" name="user" size="40" />
         <span v-if="showUsers && pipeline.user !== null" class="user">{{ pipeline.user.name }}</span>
       </div>
     </div>
@@ -151,11 +151,11 @@
     }
 
     .branch {
-      color: rgba(255, 255, 255, 0.5);
+      color: rgba(255, 255, 255, 0.9);
       display: flex;
       align-items: center;
-      font-size: 14px;
-      padding: 0 0 2px 0;
+      font-size: 70px;
+      padding: 0 0 4px 0;
       text-decoration: none;
 
       .octicon {
@@ -172,6 +172,7 @@
         display: inline-flex;
         align-items: center;
         text-decoration: none;
+        font-size: 50px;
       }
 
       .pipeline-icon {
@@ -192,14 +193,15 @@
       }
 
       .clock-icon {
-        margin-right: 3px;
+        margin-right: 6px;
+        margin-left: 6px;
         color: rgba(255, 255, 255, 0.5);
       }
 
       .duration {
         color: rgba(255, 255, 255, 0.8);
         line-height: 1;
-        font-size: 14px;
+        font-size: 40px;
         margin-right: 6px;
       }
 
